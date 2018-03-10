@@ -1,5 +1,5 @@
 #!/usr/bin/env php
-<?php
+<?php namespace Ripstop;
 
 /**
  * If we're running from phar load the phar autoload file.
@@ -15,15 +15,11 @@ if ($pharPath) {
     }
 }
 
-$output = new \Symfony\Component\Console\Output\ConsoleOutput();
+use Robo\Robo;
 
-$commandClasses = [\Ripstop\Ripstop::class];
-$statusCode     = \Robo\Robo::run(
-    $_SERVER['argv'],
-    $commandClasses,
-    'Ripstop',
-    '0.0.1',
-    $output,
-    'schlessera/ripstop'
-);
-exit($statusCode);
+$input       = new \Symfony\Component\Console\Input\ArgvInput($argv);
+$output      = new \Symfony\Component\Console\Output\ConsoleOutput();
+$config      = Robo::createConfiguration(['ripstop.yml']);
+$app         = new Ripstop($config, $input, $output);
+$status_code = $app->run($input, $output);
+exit($status_code);
