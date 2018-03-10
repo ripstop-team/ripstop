@@ -1,0 +1,10 @@
+{
+    "name": "schlessera/ripstop",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+    ],
+    "require": {
+        "consolidation/robo": "^1.2"
+    }
+}
