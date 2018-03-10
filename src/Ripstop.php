@@ -54,6 +54,8 @@ class Ripstop
                   ->withArgument(new RawArgument($apiConfig));
         $container->share('scans', Service\Scans::class)
                   ->withArgument(API::class);
+        $container->share('reports', Service\Reports::class)
+                  ->withArgument(API::class);
 
         $discovery = new \Consolidation\AnnotatedCommand\CommandFileDiscovery();
         $discovery->setSearchPattern('*.php');
