@@ -3,18 +3,22 @@
 use RIPS\Connector\API;
 use RIPS\Connector\Exceptions\ClientException;
 use RIPS\Connector\Exceptions\ServerException;
+use Ripstop\NeedsCredentials;
 use Robo\Tasks;
 
-class ListUsers extends Tasks
+class ShowUsers extends Tasks
 {
+    use NeedsCredentials;
+
     const BASE_URI = 'https://api-2.ripstech.com';
 
-    public function showUsers($opts = ['username|u' => 'testuser', 'password|p' => 'testpassword'])
+    public function showUsers()
     {
-        $config = ['base_uri' => self::BASE_URI];
+        $config      = ['base_uri' => self::BASE_URI];
+        $credentials = $this->getCredentials();
 
         // Initialize with config in constructor
-        $api = new API($opts['username'], $opts['password'], $config);
+        $api = new API($credentials->username(), $credentials->password(), $config);
 
         try {
             // Get all users
