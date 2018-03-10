@@ -8,7 +8,7 @@ use RIPS\Connector\Exceptions\ServerException;
 use Ripstop\NeedsCredentials;
 use Robo\Tasks;
 
-class ShowUsers extends Tasks
+class Users extends Tasks
 {
     use NeedsCredentials;
 

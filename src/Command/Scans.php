@@ -7,7 +7,7 @@ use RIPS\Connector\Exceptions\ServerException;
 use Robo\Robo;
 use Robo\Tasks;
 
-class ListScans extends Tasks
+class Scans extends Tasks
 {
     public function scansList(int $appId, int $limit = 1)
     {
