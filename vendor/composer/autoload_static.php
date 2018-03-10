@@ -25,6 +25,7 @@ class ComposerStaticInit1ccb7a87c7bcc0cc34a3424f489a928a
         'R' => 
         array (
             'Robo\\' => 5,
+            'Ripstop\\' => 8,
         ),
         'P' => 
         array (
@@ -89,6 +90,10 @@ class ComposerStaticInit1ccb7a87c7bcc0cc34a3424f489a928a
         'Robo\\' => 
         array (
             0 => __DIR__ . '/..' . '/consolidation/robo/src',
+        ),
+        'Ripstop\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
         'Psr\\Log\\' => 
         array (
