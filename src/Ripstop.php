@@ -8,9 +8,10 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Ripstop {
-
+class Ripstop
+{
   const APPLICATION_NAME = 'Ripstop';
+  
   const REPOSITORY = 'ripstop/ripstop';
 
   use ConfigAwareTrait;
@@ -25,13 +26,18 @@ class Ripstop {
 
     // Create applicaton.
     $this->setConfig($config);
-    $application = new Application(self::APPLICATION_NAME, $config->get('version'));
+    $application = new Application(
+        self::APPLICATION_NAME,
+        $config->get('version')
+    );
 
     // Create and configure container.
-    $container = Robo::createDefaultContainer($input, $output, $application,
-      $config);
-    $this->setContainer($container);
-    //$container->add(MyCustomService::class);
+    $container = Robo::createDefaultContainer(
+        $input,
+        $output,
+        $application,
+        $config
+    );
 
     // Instantiate Robo Runner.
     $this->runner = new RoboRunner([
@@ -41,10 +47,9 @@ class Ripstop {
     $this->runner->setSelfUpdateRepository(self::REPOSITORY);
   }
 
-  public function run(InputInterface $input, OutputInterface $output) {
-    $status_code = $this->runner->run($input, $output);
-
-    return $status_code;
+  public function run(InputInterface $input, OutputInterface $output) : int
+  {
+    return $this->runner->run($input, $output);
   }
 
 }
