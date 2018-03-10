@@ -23,7 +23,7 @@
     },
     "autoload-dev" : {
         "psr-4" : {
-            "RiptopTest\\" : "tests/"
+            "RipstopTest\\" : "tests/"
         }
     },
     "config" : {
@@ -31,5 +31,8 @@
         "platform": {
             "php": "7.0.0"
         }
-    }
+    },
+    "bin" : [
+        "bin/ripstop"
+    ]
 }
