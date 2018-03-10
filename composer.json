@@ -2,8 +2,17 @@
     "name": "ripstop/ripstop",
     "type": "project",
     "license": "MIT",
-    "authors": [
-    ],
+    "authors": [{
+        "name" : "Alain Schlesser"
+    },{
+        "name" : "Andreas Heigl"
+    },{
+        "name" : "Coach Birgit"
+    },{
+        "name" : "Florian Otto"
+    },{
+        "name" : "Robert Windisch"
+    }],
     "require": {
         "roave/security-advisories": "dev-master",
         "consolidation/robo": "^1.2"
