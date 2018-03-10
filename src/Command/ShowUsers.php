@@ -1,4 +1,6 @@
-<?php namespace Ripstop\Command;
+<?php
+
+namespace Ripstop\Commands;
 
 use RIPS\Connector\API;
 use RIPS\Connector\Exceptions\ClientException;
