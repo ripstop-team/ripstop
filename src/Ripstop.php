@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class Ripstop
 {
   const APPLICATION_NAME = 'Ripstop';
-  
+
   const REPOSITORY = 'ripstop/ripstop';
 
   use ConfigAwareTrait;
@@ -39,10 +39,12 @@ class Ripstop
         $config
     );
 
+    $discovery = new \Consolidation\AnnotatedCommand\CommandFileDiscovery();
+    $discovery->setSearchPattern('*.php');
+    $commandClasses = $discovery->discover('src/Command', '\Ripstop\Command');
+
     // Instantiate Robo Runner.
-    $this->runner = new RoboRunner([
-      Command\ListUsers::class
-    ]);
+    $this->runner = new RoboRunner($commandClasses);
     $this->runner->setContainer($container);
     $this->runner->setSelfUpdateRepository(self::REPOSITORY);
   }
