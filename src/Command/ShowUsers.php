@@ -14,7 +14,7 @@ class ShowUsers extends Tasks
 
     const BASE_URI = 'https://api-2.ripstech.com';
 
-    public function showUsers()
+    public function usersShow()
     {
         $config      = ['base_uri' => self::BASE_URI];
         $credentials = $this->getCredentials();
