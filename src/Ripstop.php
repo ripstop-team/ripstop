@@ -10,49 +10,49 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Ripstop
 {
-  const APPLICATION_NAME = 'Ripstop';
+    const APPLICATION_NAME = 'Ripstop';
 
-  const REPOSITORY = 'ripstop/ripstop';
+    const REPOSITORY = 'ripstop/ripstop';
 
-  use ConfigAwareTrait;
+    use ConfigAwareTrait;
 
-  private $runner;
+    private $runner;
 
-  public function __construct(
-    Config $config,
-    InputInterface $input = NULL,
-    OutputInterface $output = NULL
-  ) {
+    public function __construct(
+        Config $config,
+        InputInterface $input = null,
+        OutputInterface $output = null
+    ) {
 
-    // Create applicaton.
-    $application = new Application(
-        self::APPLICATION_NAME,
-        '0.0.1'
-    );
+        // Create applicaton.
+        $application = new Application(
+            self::APPLICATION_NAME,
+            '0.0.1'
+        );
 
-    // Create and configure container.
-    $container = Robo::createDefaultContainer(
-        $input,
-        $output,
-        $application,
-        $config
-    );
+        // Create and configure container.
+        $container = Robo::createDefaultContainer(
+            $input,
+            $output,
+            $application,
+            $config
+        );
 
-    $container->share('credentials', Service\Credentials::class);
+        $container->share('credentials', Service\Credentials::class);
 
-    $discovery = new \Consolidation\AnnotatedCommand\CommandFileDiscovery();
-    $discovery->setSearchPattern('*.php');
-    $commandClasses = $discovery->discover('src/Command', '\Ripstop\Command');
+        $discovery = new \Consolidation\AnnotatedCommand\CommandFileDiscovery();
+        $discovery->setSearchPattern('*.php');
+        $commandClasses = $discovery->discover('src/Command', '\Ripstop\Command');
 
-    // Instantiate Robo Runner.
-    $this->runner = new RoboRunner($commandClasses);
-    $this->runner->setContainer($container);
-    $this->runner->setSelfUpdateRepository(self::REPOSITORY);
-  }
+        // Instantiate Robo Runner.
+        $this->runner = new RoboRunner($commandClasses);
+        $this->runner->setContainer($container);
+        $this->runner->setSelfUpdateRepository(self::REPOSITORY);
+    }
 
-  public function run(InputInterface $input, OutputInterface $output) : int
-  {
-    return $this->runner->run($input, $output);
-  }
+    public function run(): int
+    {
+        return $this->runner->execute($_SERVER['argv']);
+    }
 
 }
