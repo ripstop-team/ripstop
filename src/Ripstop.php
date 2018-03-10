@@ -1,6 +1,11 @@
 <?php namespace Ripstop;
 
-class Ripstop extends \RoboFile
-{
+use Robo\Tasks;
 
+class Ripstop extends Tasks
+{
+    public function helloWorld()
+    {
+        $this->say('Hello World!');
+    }
 }
