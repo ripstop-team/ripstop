@@ -25,10 +25,9 @@ class Ripstop
   ) {
 
     // Create applicaton.
-    $this->setConfig($config);
     $application = new Application(
         self::APPLICATION_NAME,
-        $config->get('version')
+        '0.0.1'
     );
 
     // Create and configure container.
