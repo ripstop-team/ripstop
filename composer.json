@@ -1,10 +1,13 @@
 {
-    "name": "schlessera/ripstop",
+    "name": "ripstop/ripstop",
     "type": "project",
     "license": "MIT",
     "authors": [
     ],
     "require": {
         "consolidation/robo": "^1.2"
+    },
+    "autoload": {
+        "psr-4": { "Ripstop\\": "src/" }
     }
 }
