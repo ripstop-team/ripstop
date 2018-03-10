@@ -14,8 +14,9 @@
         "name" : "Robert Windisch"
     }],
     "require": {
-        "roave/security-advisories": "dev-master",
-        "consolidation/robo": "^1.2"
+        "consolidation/robo": "^1.2",
+        "rips/connector": "^2",
+        "roave/security-advisories": "dev-master"
     },
     "autoload": {
         "psr-4": { "Ripstop\\": "src/" }
