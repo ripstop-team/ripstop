@@ -1,6 +1,5 @@
 <?php namespace Ripstop;
 
-use Ripstop\Commands\ListUsersCommands;
 use Robo\Common\ConfigAwareTrait;
 use Robo\Config\Config;
 use Robo\Robo;
