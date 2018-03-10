@@ -9,7 +9,7 @@ class Credentials
     const KEY_USERNAME = 'credentials.username';
     const KEY_PASSWORD = 'credentials.password';
 
-    public function get(): CredentialsObject
+    public function __invoke(): CredentialsObject
     {
         /** @var Config $config */
         $config   = Robo::service('config');

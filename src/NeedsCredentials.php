@@ -9,6 +9,6 @@ trait NeedsCredentials
     {
         $credentials = Robo::service('credentials');
 
-        return $credentials->get();
+        return $credentials();
     }
 }
