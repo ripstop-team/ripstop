@@ -38,6 +38,8 @@ class Ripstop
         $config
     );
 
+    $container->share('credentials', Service\Credentials::class);
+
     $discovery = new \Consolidation\AnnotatedCommand\CommandFileDiscovery();
     $discovery->setSearchPattern('*.php');
     $commandClasses = $discovery->discover('src/Command', '\Ripstop\Command');

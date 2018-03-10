@@ -1,11 +1,14 @@
 <?php namespace Ripstop;
 
+use Robo\Robo;
+
 trait NeedsCredentials
 {
 
-    private function getCredentials(): Credentials
+    protected function getCredentials(): Credentials
     {
-        // TODO: Should fetch credentials from the container.
-        return new Credentials('testuser', 'testpassword');
+        $credentials = Robo::service('credentials');
+
+        return $credentials->get();
     }
 }
