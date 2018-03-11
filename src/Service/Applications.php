@@ -18,4 +18,10 @@ class Applications
 
         return Application::fromAPIResponse($response);
     }
+
+    public function upload($appId, $filename, $dir)
+    {
+        $response = $this->api->applications->uploads()->create($appId, $filename, $dir);
+        return $response;
+    }
 }

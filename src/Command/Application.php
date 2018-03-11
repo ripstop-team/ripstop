@@ -19,4 +19,18 @@ class Application extends Tasks
             $this->io()->error($e->getMessage());
         }
     }
+
+    public function appUpload(int $appId, string $dir, string $filename)
+    {
+        try {
+            // Get all users
+            $application = Robo::service('applications');
+            $application->upload($appId, $dir, $filename);
+
+        } catch (ClientException $e) {
+            $this->io()->error($e->getMessage());
+        } catch (ServerException $e) {
+            $this->io()->error($e->getMessage());
+        }
+    }
 }
