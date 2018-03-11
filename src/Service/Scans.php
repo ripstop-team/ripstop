@@ -46,7 +46,6 @@ class Scans
                 "uploadRemoved" => false,
                 "fullCodeCompared" => true,
                 "historyInherited" => true,
-                "issueTypes" => [10],
                 "version" => $version,
                 "upload" => $upload->getId(),
                 "analysisDepth" => 5,
