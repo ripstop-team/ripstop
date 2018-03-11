@@ -1,18 +1,18 @@
 <?php namespace Ripstop;
 
+use League\Container\Argument\RawArgument;
 use League\Container\ReflectionContainer;
+use Mustache_Engine;
 use RIPS\Connector\API;
 use Robo\Common\ConfigAwareTrait;
 use Robo\Config\Config;
 use Robo\Robo;
 use Robo\Runner as RoboRunner;
+use Swift_Mailer;
+use Swift_SendmailTransport;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use League\Container\Argument\RawArgument;
-use Swift_Mailer;
-use Swift_SendmailTransport;
-use Mustache_Engine;
 
 class Ripstop
 {
@@ -64,9 +64,9 @@ class Ripstop
                   ->withArgument(new RawArgument($apiConfig));
 
         $container->share('applications', Service\Applications::class)
-                  ->withArgument(API::class);
+            ->withArgument(API::class);
         $container->share('scans', Service\Scans::class)
-                  ->withArgument(API::class);
+            ->withArgument(API::class);
         $container->share('reports', Service\Reports::class)
                   ->withArgument(API::class);
 
@@ -79,11 +79,11 @@ class Ripstop
                   ->withArgument(new RawArgument($template));
 
         $container->share(Swift_Mailer::class, Swift_Mailer::class)
-                  ->withArgument(new Swift_SendmailTransport('/usr/sbin/sendmail -bs'));
+            ->withArgument(new Swift_SendmailTransport('/usr/sbin/sendmail -bs'));
         $container->share('app_data', Service\ApplicationData::class)
-                  ->withArgument(API::class);
+            ->withArgument(API::class);
         $container->share('applicationIdForName', Service\ApplicationIdForName::class)
-                  ->withArgument(API::class);
+            ->withArgument(API::class);
 
         $discovery = new \Consolidation\AnnotatedCommand\CommandFileDiscovery();
         $discovery->setSearchPattern('*.php');
