@@ -1,4 +1,12 @@
-<?php namespace Ripstop\Service;
+<?php
+
+/*
+ * Copyright (c) Ripstop Contributors. All rights reserved.
+ * Licensed under the MIT License. See LICENSE.md file in the
+ * project root for full license information.
+ */
+
+namespace Ripstop\Service;
 
 use RIPS\Connector\API;
 use Ripstop\Application;
@@ -20,7 +28,7 @@ class Applications
         return Application::fromAPIResponse($response);
     }
 
-    public function upload($appId, $filename, $dir) : Upload
+    public function upload($appId, $filename, $dir): Upload
     {
         $response = $this->api->applications->uploads()->create($appId, $filename, $dir);
 

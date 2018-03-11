@@ -1,4 +1,12 @@
-<?php namespace Ripstop\Service;
+<?php
+
+/*
+ * Copyright (c) Ripstop Contributors. All rights reserved.
+ * Licensed under the MIT License. See LICENSE.md file in the
+ * project root for full license information.
+ */
+
+namespace Ripstop\Service;
 
 use RIPS\Connector\API;
 use Ripstop\ScanCollection;
@@ -36,20 +44,19 @@ class Scans
         Upload $upload,
         string $version,
         array $callbacks = []
-    ) : Scan
-    {
+    ): Scan {
         /** @var \RIPS\Connector\Requests\Application\ScanRequests $scans */
         $scans = $this->api->applications->scans();
 
         $parameters = [
-                "codeStored" => true,
-                "uploadRemoved" => false,
-                "fullCodeCompared" => true,
-                "historyInherited" => true,
-                "version" => $version,
-                "upload" => $upload->getId(),
-                "analysisDepth" => 5,
-                "callbacks" => $callbacks,
+            "codeStored"       => true,
+            "uploadRemoved"    => false,
+            "fullCodeCompared" => true,
+            "historyInherited" => true,
+            "version"          => $version,
+            "upload"           => $upload->getId(),
+            "analysisDepth"    => 5,
+            "callbacks"        => $callbacks,
         ];
 
 

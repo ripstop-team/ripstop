@@ -1,4 +1,12 @@
-<?php namespace Ripstop;
+<?php
+
+/*
+ * Copyright (c) Ripstop Contributors. All rights reserved.
+ * Licensed under the MIT License. See LICENSE.md file in the
+ * project root for full license information.
+ */
+
+namespace Ripstop;
 
 use League\Container\Argument\RawArgument;
 use League\Container\ReflectionContainer;
@@ -64,9 +72,9 @@ class Ripstop
                   ->withArgument(new RawArgument($apiConfig));
 
         $container->share('applications', Service\Applications::class)
-            ->withArgument(API::class);
+                  ->withArgument(API::class);
         $container->share('scans', Service\Scans::class)
-            ->withArgument(API::class);
+                  ->withArgument(API::class);
         $container->share('reports', Service\Reports::class)
                   ->withArgument(API::class);
 
@@ -79,11 +87,11 @@ class Ripstop
                   ->withArgument(new RawArgument($template));
 
         $container->share(Swift_Mailer::class, Swift_Mailer::class)
-            ->withArgument(new Swift_SendmailTransport('/usr/sbin/sendmail -bs'));
+                  ->withArgument(new Swift_SendmailTransport('/usr/sbin/sendmail -bs'));
         $container->share('app_data', Service\ApplicationData::class)
-            ->withArgument(API::class);
+                  ->withArgument(API::class);
         $container->share('applicationForName', Service\ApplicationForName::class)
-            ->withArgument(API::class);
+                  ->withArgument(API::class);
 
         $discovery = new \Consolidation\AnnotatedCommand\CommandFileDiscovery();
         $discovery->setSearchPattern('*.php');
