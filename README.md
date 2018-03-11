@@ -18,7 +18,7 @@ composer global install ripstop/ripstop
 
 There might be a PHAR in future time but not now.
 
-## Usage:
+## Usage
 
 Before you can use the tool you will need to copy the configuration file
 `ripstop.dist.yml` to `ripstop.yml` and replace the configuration parameters
@@ -32,3 +32,7 @@ ripstop reports:pdf <applicationId> [<scanId>] [--filename=/path/to/store/the/PD
 ```
 
 This will download the report to `/path/to/store/the/PDF/report/in.pdf`
+
+## License
+
+The code in this repository is licensed under the [MIT License](LICENSE).
