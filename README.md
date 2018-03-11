@@ -35,6 +35,6 @@ This will download the report to `/path/to/store/the/PDF/report/in.pdf`
 
 ## License
 
-Copyright (c) Ripstop Contributors. All rights reserved.
+Copyright (c) [Ripstop Contributors](https://github.com/schlessera/ripstop/graphs/contributors). All rights reserved.
 
 Licensed under the MIT License. See [LICENSE.md](LICENSE.md) file in the project root for full license information.
