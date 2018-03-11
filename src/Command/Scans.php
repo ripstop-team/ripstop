@@ -14,8 +14,9 @@ class Scans extends Tasks
         try {
             // Get all users
             $scans = Robo::service('scans')($appId, $limit);
+            /** @var \Ripstop\Scan $scan */
             foreach ($scans as $scan) {
-                $this->say($scan->id);
+                $this->say($scan->getId());
             }
         } catch (ClientException $e) {
             $this->io()->error($e->getMessage());
