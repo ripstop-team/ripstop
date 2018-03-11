@@ -64,6 +64,8 @@ class Ripstop
                   ->withArgument(Mustache_Engine::class);
         $container->share(Swift_Mailer::class, Swift_Mailer::class)
                   ->withArgument(new Swift_SendmailTransport('/usr/sbin/sendmail -S mail:1025'));
+        $container->share('applicationIdForName', Service\ApplicationIdForName::class)
+                  ->withArgument(API::class);
 
         $discovery = new \Consolidation\AnnotatedCommand\CommandFileDiscovery();
         $discovery->setSearchPattern('*.php');
