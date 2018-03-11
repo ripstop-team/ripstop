@@ -10,6 +10,9 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use League\Container\Argument\RawArgument;
+use Swift_Mailer;
+use Swift_SendmailTransport;
+use Mustache_Engine;
 
 class Ripstop
 {
@@ -56,6 +59,11 @@ class Ripstop
                   ->withArgument(API::class);
         $container->share('reports', Service\Reports::class)
                   ->withArgument(API::class);
+        $container->share('emailer', Service\Emailer::class)
+                  ->withArgument(Swift_Mailer::class)
+                  ->withArgument(Mustache_Engine::class);
+        $container->share(Swift_Mailer::class, Swift_Mailer::class)
+                  ->withArgument(new Swift_SendmailTransport('/usr/sbin/sendmail -S mail:1025'));
 
         $discovery = new \Consolidation\AnnotatedCommand\CommandFileDiscovery();
         $discovery->setSearchPattern('*.php');
