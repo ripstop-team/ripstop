@@ -35,4 +35,4 @@ This will download the report to `/path/to/store/the/PDF/report/in.pdf`
 
 ## License
 
-The code in this repository is licensed under the [MIT License](LICENSE).
+The code in this repository is licensed under the [MIT License](LICENSE.md).
