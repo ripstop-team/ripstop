@@ -14,10 +14,11 @@
         "name" : "Robert Windisch"
     }],
     "require": {
-        "php" : "^7.0",
+        "php": "^7.0",
         "consolidation/robo": "^1.2",
         "rips/connector": "^2",
-        "roave/security-advisories": "dev-master"
+        "roave/security-advisories": "dev-master",
+        "swiftmailer/swiftmailer": "^6.0"
     },
     "autoload": {
         "psr-4": { "Ripstop\\": "src/" }
