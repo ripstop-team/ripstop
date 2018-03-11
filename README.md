@@ -10,7 +10,7 @@ You will need an account at RIPStech to use this.
 
 ## Installation
 
-Install this globaly using [composer](https://getcomposer.org):
+Install this globally using [composer](https://getcomposer.org):
 
 ```bash
 composer global install ripstop/ripstop
