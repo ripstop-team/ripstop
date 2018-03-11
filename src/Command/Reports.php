@@ -21,7 +21,10 @@ class Reports extends Tasks
             $scanId = $this->getLatestScanId($appId);
         }
 
-        $filename = tempnam(sys_get_temp_dir(), 'ripstop') . '.pdf';
+        $data = Robo::service('app_data')($appId, $scanId);
+
+        $prefix   = "sec_report_{$data['application_slug']}_{$data['application_version']}";
+        $filename = tempnam(sys_get_temp_dir(), $prefix) . '.pdf';
 
         $success = Robo::service('reports')($appId, $scanId, $filename);
 
@@ -31,7 +34,6 @@ class Reports extends Tasks
             return;
         }
 
-        $data    = Robo::service('app_data')($appId, $scanId);
         $success = Robo::service('emailer')($opts['subject'], $recipient, $opts['sender'], $filename, $data);
 
         unlink($filename);
