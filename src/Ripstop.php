@@ -63,7 +63,7 @@ class Ripstop
                   ->withArgument(Swift_Mailer::class)
                   ->withArgument(Mustache_Engine::class);
         $container->share(Swift_Mailer::class, Swift_Mailer::class)
-                  ->withArgument(new Swift_SendmailTransport('/usr/sbin/sendmail -S mail:1025'));
+                  ->withArgument(new Swift_SendmailTransport('/usr/sbin/sendmail -bs'));
         $container->share('applicationIdForName', Service\ApplicationIdForName::class)
                   ->withArgument(API::class);
 
