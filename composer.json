@@ -16,6 +16,7 @@
     "require": {
         "php": "^7.0",
         "consolidation/robo": "^1.2",
+        "mustache/mustache": "^2.12",
         "rips/connector": "^2",
         "roave/security-advisories": "dev-master",
         "swiftmailer/swiftmailer": "^6.0"
