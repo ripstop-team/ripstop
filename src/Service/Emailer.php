@@ -32,12 +32,12 @@ class Emailer
     public function __invoke($subject, $recipient, $sender, $attachment, $data): bool
     {
         $subject = $this->mustache->render($subject, $data);
-        $body    = $this->mustache->render($this->template, $data);
-        $mail    = (new Swift_Message($subject, $body))
+        $body    = $this->mustache->render(file_get_contents($this->template), $data);
+        $mail   = (new Swift_Message($subject, $body))
             ->setFrom($sender)
             ->setTo($recipient)
             ->attach(Swift_Attachment::fromPath($attachment));
-        $result  = $this->mailer->send($mail);
+        $result = $this->mailer->send($mail);
 
         return $result === 1;
     }

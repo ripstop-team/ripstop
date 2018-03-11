@@ -31,8 +31,7 @@ class Reports extends Tasks
             return;
         }
 
-        // TODO: Implement service to get slug and version data.
-        //$data    = Robo::service('app_data')($appId, $scanId);
+        $data    = Robo::service('app_data')($appId, $scanId);
         $data    = ['application_slug' => 'test_plugin', 'application_version' => '1.0'];
         $success = Robo::service('emailer')($opts['subject'], $recipient, $opts['sender'], $filename, $data);
 
@@ -72,7 +71,7 @@ class Reports extends Tasks
         $scanService = Robo::service('scans');
 
         /** @var ScanCollection $scans */
-        $scans = $scanService($appId, 1);
+        $scans = $scanService->latest($appId, 1);
         if ($scans->count() < 1) {
             $this->yell("No scans found for Application ID {$appId}!", 40, 'red');
             exit();

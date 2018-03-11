@@ -2,6 +2,7 @@
 
 use RIPS\Connector\API;
 use Ripstop\ScanCollection;
+use Ripstop\Scan;
 
 class Scans
 {
@@ -12,7 +13,14 @@ class Scans
         $this->api = $api;
     }
 
-    public function __invoke($appId, $limit = 1): ScanCollection
+    public function get($appId, $scanId): Scan
+    {
+        $response = $this->api->applications->scans()->getById($appId, $scanId);
+
+        return Scan::fromAPIResponse($response);
+    }
+
+    public function latest($appId, $limit = 1): ScanCollection
     {
         $response = $this->api->applications->scans()->getAll($appId);
         $scans    = ScanCollection::fromAPIResponse($response)

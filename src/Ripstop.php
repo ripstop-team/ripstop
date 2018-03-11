@@ -55,6 +55,8 @@ class Ripstop
                   ->withArgument(new RawArgument($credentials->username()))
                   ->withArgument(new RawArgument($credentials->password()))
                   ->withArgument(new RawArgument($apiConfig));
+        $container->share('applications', Service\Applications::class)
+                  ->withArgument(API::class);
         $container->share('scans', Service\Scans::class)
                   ->withArgument(API::class);
         $container->share('reports', Service\Reports::class)
@@ -64,6 +66,8 @@ class Ripstop
                   ->withArgument(Mustache_Engine::class);
         $container->share(Swift_Mailer::class, Swift_Mailer::class)
                   ->withArgument(new Swift_SendmailTransport('/usr/sbin/sendmail -bs'));
+        $container->share('app_data', Service\ApplicationData::class)
+                  ->withArgument(API::class);
         $container->share('applicationIdForName', Service\ApplicationIdForName::class)
                   ->withArgument(API::class);
 
