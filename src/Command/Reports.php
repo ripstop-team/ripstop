@@ -23,7 +23,7 @@ class Reports extends Tasks
 
         $data = Robo::service('app_data')($appId, $scanId);
 
-        $prefix   = "sec_report_{$data['application_slug']}_{$data['application_version']}";
+        $prefix   = "sec_report_{$data['application_slug']}_{$data['application_version']}_";
         $filename = tempnam(sys_get_temp_dir(), $prefix) . '.pdf';
 
         $success = Robo::service('reports')($appId, $scanId, $filename);
