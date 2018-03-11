@@ -1,0 +1,14 @@
+language: php
+
+before_deploy:
+  - composer buildphar
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_API_KEY
+  file:
+    - build/ripstop.phar
+  skip_cleanup: true
+  on:
+    tags: true
+    php: 7.0
