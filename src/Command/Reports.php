@@ -19,7 +19,7 @@ class Reports extends Tasks
     ) {
         if ( ! is_numeric($application)) {
             /** @var \Ripstop\Application $application */
-            $application = Robo::service('applicationIdForName')($application);
+            $application = Robo::service('applicationForName')($application);
         }
 
         if ($scanId === null) {
@@ -56,7 +56,7 @@ class Reports extends Tasks
     {
         if ( ! is_numeric($application)) {
             /** @var \Ripstop\Application $application */
-            $application = Robo::service('applicationIdForName')($application);
+            $application = Robo::service('applicationForName')($application);
         }
 
         if ($scanId === null) {

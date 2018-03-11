@@ -82,7 +82,7 @@ class Ripstop
             ->withArgument(new Swift_SendmailTransport('/usr/sbin/sendmail -bs'));
         $container->share('app_data', Service\ApplicationData::class)
             ->withArgument(API::class);
-        $container->share('applicationIdForName', Service\ApplicationIdForName::class)
+        $container->share('applicationForName', Service\ApplicationForName::class)
             ->withArgument(API::class);
 
         $discovery = new \Consolidation\AnnotatedCommand\CommandFileDiscovery();

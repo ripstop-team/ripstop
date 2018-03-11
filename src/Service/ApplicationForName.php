@@ -6,7 +6,7 @@ use RIPS\Connector\API;
 use Ripstop\Application;
 use Ripstop\ApplicationCollection;
 
-class ApplicationIdForName
+class ApplicationForName
 {
     private $api;
 

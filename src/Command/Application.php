@@ -13,7 +13,7 @@ class Application extends Tasks
     {
         try {
             /** @var \Ripstop\Application $application */
-            $application = Robo::service('applicationIdForName')($slug);
+            $application = Robo::service('applicationForName')($slug);
             $this->say($application->getId());
         } catch (ClientException $e) {
             $this->io()->error($e->getMessage());

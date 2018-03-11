@@ -13,7 +13,7 @@ class Scans extends Tasks
     {
         if ( ! is_numeric($application)) {
             /** @var \Ripstop\Application $application */
-            $application = Robo::service('applicationIdForName')($application);
+            $application = Robo::service('applicationForName')($application);
         }
         try {
             // Get all users
@@ -33,8 +33,8 @@ class Scans extends Tasks
     {
         try {
             if ( ! is_numeric($application)) {
-                /** @var \Ripstop\Service\ApplicationIdForName $appId4Name */
-                $appId4Name  = Robo::service('applicationIdForName');
+                /** @var \Ripstop\Service\ApplicationForName $appId4Name */
+                $appId4Name  = Robo::service('applicationForName');
                 $application = $appId4Name($application);
             } else {
                 /** @var \Ripstop\Service\Applications $appService */
