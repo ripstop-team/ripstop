@@ -20,7 +20,10 @@ class Ripstop
 
     const REPOSITORY = 'ripstop/ripstop';
 
+    const KEY_BASE_URI = 'base_uri';
+    const KEY_TEMPLATE = 'email_template';
     const BASE_URI = 'https://api-2.ripstech.com';
+    const TEMPLATE = 'templates/email_message.mustache';
 
     use ConfigAwareTrait;
 
@@ -50,20 +53,31 @@ class Ripstop
 
         /** @var Credentials $credentials */
         $credentials = (new Service\Credentials())();
-        $apiConfig   = ['base_uri' => self::BASE_URI];
+        $base_uri    = $config->has(self::KEY_BASE_URI)
+            ? $config->get(self::KEY_BASE_URI)
+            : self::BASE_URI;
+
+        $apiConfig = ['base_uri' => $base_uri];
         $container->share(API::class, API::class)
                   ->withArgument(new RawArgument($credentials->username()))
                   ->withArgument(new RawArgument($credentials->password()))
                   ->withArgument(new RawArgument($apiConfig));
+
         $container->share('applications', Service\Applications::class)
                   ->withArgument(API::class);
         $container->share('scans', Service\Scans::class)
                   ->withArgument(API::class);
         $container->share('reports', Service\Reports::class)
                   ->withArgument(API::class);
+
+        $template = $config->has(self::KEY_TEMPLATE)
+            ? $config->get(self::KEY_TEMPLATE)
+            : self::TEMPLATE;
         $container->share('emailer', Service\Emailer::class)
                   ->withArgument(Swift_Mailer::class)
-                  ->withArgument(Mustache_Engine::class);
+                  ->withArgument(Mustache_Engine::class)
+                  ->withArgument(new RawArgument($template));
+
         $container->share(Swift_Mailer::class, Swift_Mailer::class)
                   ->withArgument(new Swift_SendmailTransport('/usr/sbin/sendmail -bs'));
         $container->share('app_data', Service\ApplicationData::class)

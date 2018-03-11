@@ -1,3 +1,5 @@
+base_uri: https://api-2.ripstech.com
 credentials:
   username: <username>
   password: <password>
+email_template: templates/email_message.mustache

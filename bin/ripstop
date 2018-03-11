@@ -19,7 +19,7 @@ use Robo\Robo;
 
 $input       = new \Symfony\Component\Console\Input\ArgvInput($argv);
 $output      = new \Symfony\Component\Console\Output\ConsoleOutput();
-$config      = Robo::createConfiguration(['ripstop.yml']);
+$config      = Robo::createConfiguration(['ripstop.dist.yml', 'ripstop.yml']);
 $app         = new Ripstop($config, $input, $output);
 $status_code = $app->run($input, $output);
 exit($status_code);
