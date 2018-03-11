@@ -23,9 +23,9 @@ class Scans
         $this->api = $api;
     }
 
-    public function get($appId, $scanId): Scan
+    public function get(Application $app, int $scanId): Scan
     {
-        $response = $this->api->applications->scans()->getById($appId, $scanId);
+        $response = $this->api->applications->scans()->getById($app->getId(), $scanId);
 
         return Scan::fromAPIResponse($response);
     }

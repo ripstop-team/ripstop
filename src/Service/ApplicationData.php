@@ -27,7 +27,7 @@ class ApplicationData
         /** @var Application $application */
         $application = Robo::service('applications')->get($appId);
         /** @var Scan $scan */
-        $scan = Robo::service('scans')->get($appId, $scanId);
+        $scan = Robo::service('scans')->get($application, $scanId);
 
         return [
             'application_slug'    => $application->getName(),

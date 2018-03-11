@@ -11,6 +11,7 @@ namespace Ripstop\Service;
 use RIPS\Connector\API;
 use Ripstop\Application;
 use Ripstop\Upload;
+use Robo\Robo;
 
 class Applications
 {
@@ -23,6 +24,11 @@ class Applications
 
     public function get($appId): Application
     {
+        if ( ! is_numeric($appId)) {
+            /** @var \Ripstop\Application $application */
+            return Robo::service('applicationForName')($appId);
+        }
+
         $response = $this->api->applications->getById($appId);
 
         return Application::fromAPIResponse($response);

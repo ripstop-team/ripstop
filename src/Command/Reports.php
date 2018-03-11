@@ -23,10 +23,8 @@ class Reports extends Tasks
             'sender'    => 'noreply@example.com',
         ]
     ) {
-        if ( ! is_numeric($application)) {
-            /** @var \Ripstop\Application $application */
-            $application = Robo::service('applicationForName')($application);
-        }
+        /** @var \Ripstop\Application $application */
+        $application = Robo::service('applications')->get($application);
 
         if ($scanId === null) {
             $scanId = $this->getLatestScanId($application->getId());
@@ -60,10 +58,8 @@ class Reports extends Tasks
 
     public function reportsPdf($application, int $scanId = null, $opts = ['filename|f' => null])
     {
-        if ( ! is_numeric($application)) {
-            /** @var \Ripstop\Application $application */
-            $application = Robo::service('applicationForName')($application);
-        }
+        /** @var \Ripstop\Application $application */
+        $application = Robo::service('applications')->get($application);
 
         if ($scanId === null) {
             $scanId = $this->getLatestScanId($application->getId());

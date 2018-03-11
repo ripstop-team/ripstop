@@ -17,10 +17,9 @@ class Scans extends Tasks
 {
     public function scansList($application, int $limit = 1)
     {
-        if ( ! is_numeric($application)) {
-            /** @var \Ripstop\Application $application */
-            $application = Robo::service('applicationForName')($application);
-        }
+        /** @var \Ripstop\Application $application */
+        $application = Robo::service('applications')->get($application);
+
         try {
             // Get all users
             $scans = Robo::service('scans')->latest($application->getId(), $limit);
@@ -38,19 +37,11 @@ class Scans extends Tasks
     public function scansCreate($application, string $filepath, string $version)
     {
         try {
-            if ( ! is_numeric($application)) {
-                /** @var \Ripstop\Service\ApplicationForName $appId4Name */
-                $appId4Name  = Robo::service('applicationForName');
-                $application = $appId4Name($application);
-            } else {
-                /** @var \Ripstop\Service\Applications $appService */
-                $appService  = Robo::service('applications');
-                $application = $appService->get($application);
-            }
-
             /** @var \Ripstop\Service\Applications $uploadService */
-            $uploadService = Robo::service('applications');
-            $upload        = $uploadService->upload($application->getId(), basename($filepath), $filepath);
+            $applicationService = Robo::service('applications');
+            /** @var \Ripstop\Application $application */
+            $application = $applicationService->get($application);
+            $upload      = $applicationService->upload($application->getId(), basename($filepath), $filepath);
 
             /** @var \Ripstop\Service\Scans $scans */
             $scans  = Robo::service('scans');
