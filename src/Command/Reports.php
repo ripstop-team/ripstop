@@ -31,7 +31,7 @@ class Reports extends Tasks
         $prefix   = "sec_report_{$data['application_slug']}_{$data['application_version']}_";
         $filename = tempnam(sys_get_temp_dir(), $prefix) . '.pdf';
 
-        $success = Robo::service('reports')($application, $scanId, $filename);
+        $success = Robo::service('reports')($application->getId(), $scanId, $filename);
 
         if ($success === false) {
             $this->yell("Couldn't fetch PDF report for Scan ID {$scanId} of Application ID {$application->getId()}!", 40, 'red');
