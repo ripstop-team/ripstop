@@ -2,6 +2,7 @@
 
 use RIPS\Connector\API;
 use Ripstop\Application;
+use Ripstop\Upload;
 
 class Applications
 {
@@ -19,9 +20,10 @@ class Applications
         return Application::fromAPIResponse($response);
     }
 
-    public function upload($appId, $filename, $dir)
+    public function upload($appId, $filename, $dir) : Upload
     {
         $response = $this->api->applications->uploads()->create($appId, $filename, $dir);
-        return $response;
+
+        return Upload::fromAPIResponse($response);
     }
 }

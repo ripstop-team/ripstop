@@ -24,4 +24,32 @@ class Scans extends Tasks
             $this->io()->error($e->getMessage());
         }
     }
+
+    public function scansCreate($application, string $filepath, string $version)
+    {
+        try {
+            if (! is_numeric($application)) {
+                /** @var \Ripstop\Service\ApplicationIdForName $appId4Name */
+                $appId4Name  = Robo::service('applicationIdForName');
+                $application = $appId4Name($application);
+            } else {
+                /** @var \Ripstop\Service\Applications $appService */
+                $appService = Robo::service('applications');
+                $application = $appService->get($application);
+            }
+
+            /** @var \Ripstop\Service\Applications $uploadService */
+            $uploadService = Robo::service('applications');
+            $upload = $uploadService->upload($application->getId(), basename($filepath), $filepath);
+
+            /** @var \Ripstop\Service\Scans $scans */
+            $scans = Robo::service('scans');
+            $result = $scans->create($application, $upload, $version);
+            $this->say(sprintf('Scan %1$s successfuly created', $result->getId()));
+        } catch (ClientException $e) {
+            $this->io()->error($e->getMessage());
+        } catch (ServerException $e) {
+            $this->io()->error($e->getMessage());
+        }
+    }
 }

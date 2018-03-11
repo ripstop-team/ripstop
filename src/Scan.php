@@ -20,7 +20,7 @@ class Scan
             'id' => $data->id,
             'version' => $data->version,
             'start' => new DateTimeImmutable($data->start),
-            'finish' => new DateTimeImmutable($data->finish),
+            'finish' => new DateTimeImmutable('@0'),
             'phase' => $data->phase,
             'percent' => $data->percent,
             'loc' => $data->loc,
@@ -28,6 +28,11 @@ class Scan
             'upload_removed' => $data->upload_removed,
             'source_type' => $data->source_type,
         ];
+
+        if (isset($data->finish)) {
+            $this->data['finish'] = new DateTimeImmutable($data->finish);
+
+        }
     }
 
     public function getId() : int
