@@ -10,26 +10,31 @@ class Reports extends Tasks
 {
     public function reportsSend(
         string $recipient,
-        int $appId,
+        $application,
         int $scanId = null,
         $opts = [
             'subject|s' => 'Security vulnerability detected in your package {{ application_slug }}',
             'sender'    => 'noreply@example.com',
         ]
     ) {
-        if ($scanId === null) {
-            $scanId = $this->getLatestScanId($appId);
+        if ( ! is_numeric($application)) {
+            /** @var \Ripstop\Application $application */
+            $application = Robo::service('applicationIdForName')($application);
         }
 
-        $data = Robo::service('app_data')($appId, $scanId);
+        if ($scanId === null) {
+            $scanId = $this->getLatestScanId($application->getId());
+        }
+
+        $data = Robo::service('app_data')($application->getId(), $scanId);
 
         $prefix   = "sec_report_{$data['application_slug']}_{$data['application_version']}_";
         $filename = tempnam(sys_get_temp_dir(), $prefix) . '.pdf';
 
-        $success = Robo::service('reports')($appId, $scanId, $filename);
+        $success = Robo::service('reports')($application, $scanId, $filename);
 
         if ($success === false) {
-            $this->yell("Couldn't fetch PDF report for Scan ID {$scanId} of Application ID {$appId}!", 40, 'red');
+            $this->yell("Couldn't fetch PDF report for Scan ID {$scanId} of Application ID {$application->getId()}!", 40, 'red');
 
             return;
         }
@@ -39,7 +44,7 @@ class Reports extends Tasks
         unlink($filename);
 
         if ($success === false) {
-            $this->yell("Couldn't send PDF report for Scan ID {$scanId} of Application ID {$appId}!", 40, 'red');
+            $this->yell("Couldn't send PDF report for Scan ID {$scanId} of Application ID {$application->getId()}!", 40, 'red');
 
             return;
         }
@@ -47,19 +52,24 @@ class Reports extends Tasks
         $this->say('PDF successfully sent.');
     }
 
-    public function reportsPdf(int $appId, int $scanId = null, $opts = ['filename|f' => null])
+    public function reportsPdf($application, int $scanId = null, $opts = ['filename|f' => null])
     {
+        if ( ! is_numeric($application)) {
+            /** @var \Ripstop\Application $application */
+            $application = Robo::service('applicationIdForName')($application);
+        }
+
         if ($scanId === null) {
-            $scanId = $this->getLatestScanId($appId);
+            $scanId = $this->getLatestScanId($application->getId());
         }
 
         if ($opts['filename'] === null) {
             $opts['filename'] = tempnam(sys_get_temp_dir(), 'ripstop') . '.pdf';
         }
 
-        $success = Robo::service('reports')($appId, $scanId, $opts['filename']);
+        $success = Robo::service('reports')($application->getId(), $scanId, $opts['filename']);
         if ($success === false) {
-            $this->yell("Couldn't fetch PDF report for Scan ID {$scanId} of Application ID {$appId}!", 40, 'red');
+            $this->yell("Couldn't fetch PDF report for Scan ID {$scanId} of Application ID {$application->getId()}!", 40, 'red');
 
             return;
         }

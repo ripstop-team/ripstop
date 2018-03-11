@@ -9,11 +9,15 @@ use Robo\Tasks;
 
 class Scans extends Tasks
 {
-    public function scansList(int $appId, int $limit = 1)
+    public function scansList($application, int $limit = 1)
     {
+        if ( ! is_numeric($application)) {
+            /** @var \Ripstop\Application $application */
+            $application = Robo::service('applicationIdForName')($application);
+        }
         try {
             // Get all users
-            $scans = Robo::service('scans')($appId, $limit);
+            $scans = Robo::service('scans')->latest($application->getId(), $limit);
             /** @var \Ripstop\Scan $scan */
             foreach ($scans as $scan) {
                 $this->say($scan->getId());
@@ -28,22 +32,22 @@ class Scans extends Tasks
     public function scansCreate($application, string $filepath, string $version)
     {
         try {
-            if (! is_numeric($application)) {
+            if ( ! is_numeric($application)) {
                 /** @var \Ripstop\Service\ApplicationIdForName $appId4Name */
                 $appId4Name  = Robo::service('applicationIdForName');
                 $application = $appId4Name($application);
             } else {
                 /** @var \Ripstop\Service\Applications $appService */
-                $appService = Robo::service('applications');
+                $appService  = Robo::service('applications');
                 $application = $appService->get($application);
             }
 
             /** @var \Ripstop\Service\Applications $uploadService */
             $uploadService = Robo::service('applications');
-            $upload = $uploadService->upload($application->getId(), basename($filepath), $filepath);
+            $upload        = $uploadService->upload($application->getId(), basename($filepath), $filepath);
 
             /** @var \Ripstop\Service\Scans $scans */
-            $scans = Robo::service('scans');
+            $scans  = Robo::service('scans');
             $result = $scans->create($application, $upload, $version);
             $this->say(sprintf('Scan %1$s successfuly created', $result->getId()));
         } catch (ClientException $e) {

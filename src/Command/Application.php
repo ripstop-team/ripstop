@@ -12,7 +12,9 @@ class Application extends Tasks
     public function appGetidforname(string $slug)
     {
         try {
-            $this->say(Robo::service('applicationIdForName')($slug)->getId());
+            /** @var \Ripstop\Application $application */
+            $application = Robo::service('applicationIdForName')($slug);
+            $this->say($application->getId());
         } catch (ClientException $e) {
             $this->io()->error($e->getMessage());
         } catch (ServerException $e) {
