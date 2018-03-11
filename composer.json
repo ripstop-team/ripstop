@@ -42,5 +42,29 @@
         "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
         "squizlabs/php_codesniffer": "^3.2",
         "wimg/php-compatibility": "^8.1"
+    },
+    "scripts": {
+        "buildphar" : [
+            "rm -rf vendor",
+            "composer install --no-dev --prefer-dist",
+            "curl -o createPhar -L `curl -s https://api.github.com/repos/MacFJA/PharBuilder/releases | grep browser_download_url | head -n 1 | cut -d '\"' -f 4`",
+            "chmod 755 createPhar",
+            "mkdir -p ./build",
+            "php -d phar.readonly=0 ./createPhar package composer.json"
+        ]
+    },
+    "extra": {
+        "phar-builder": {
+            "compression": "GZip",
+            "name": "ripstop.phar",
+            "output-dir": "./build",
+            "entry-point": "./bin/ripstop",
+            "include-dev": false,
+            "include" : [
+                "bin",
+                "src"
+            ],
+            "skip-shebang" : false
+        }
     }
 }
