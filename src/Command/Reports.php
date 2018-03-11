@@ -32,7 +32,6 @@ class Reports extends Tasks
         }
 
         $data    = Robo::service('app_data')($appId, $scanId);
-        $data    = ['application_slug' => 'test_plugin', 'application_version' => '1.0'];
         $success = Robo::service('emailer')($opts['subject'], $recipient, $opts['sender'], $filename, $data);
 
         unlink($filename);
