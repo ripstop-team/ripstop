@@ -28,7 +28,7 @@ Then you can use it to retrieve the report of the last run against your code
 like this:
 
 ```bash
-ripstop reports:pdf [applicationId] [/path/to/store/the/PDF/report/in.pdf]
+ripstop reports:pdf <applicationId> [<scanId>] [--filename=/path/to/store/the/PDF/report/in.pdf]
 ```
 
 This will download the report to `/path/to/store/the/PDF/report/in.pdf`
